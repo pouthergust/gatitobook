@@ -9,43 +9,66 @@
       formControlName="email"
       >
       <app-mensagem
-        *ngIf="novoUsuarioForm.get('email')?.errors?.required &&
-        novoUsuarioForm.get('email')?.touched"
+        *ngIf="
+          novoUsuarioForm.get('email')?.errors?.required &&
+          novoUsuarioForm.get('email')?.touched"
         mensagem="Email Obrigatorio"
         ></app-mensagem>
       <app-mensagem
-        *ngIf="novoUsuarioForm.get('email')?.errors?.email &&
-        novoUsuarioForm.get('email')?.touched"
+        *ngIf="
+          novoUsuarioForm.get('email')?.errors?.email &&
+          novoUsuarioForm.get('email')?.touched"
         mensagem="Insira um email valido"
         ></app-mensagem>
-  </div>
+      </div>
 
-  <div class="form-group">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Nome Completo"
+      <div class="form-group">
+        <input
+        type="text"
+        class="form-control"
+        placeholder="Nome Completo"
       formControlName="fullName"
       >
-  </div>
+      <app-mensagem
+        *ngIf="
+          novoUsuarioForm.get('fullName')?.errors &&
+          novoUsuarioForm.get('fullName')?.touched"
+        mensagem="Insira um nome valido"
+        ></app-mensagem>
+      </div>
 
-  <div class="form-group">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Usuário"
-      formControlName="userName"
-      >
-  </div>
+      <div class="form-group">
+        <input
+        type="text"
+        class="form-control"
+        placeholder="Usuário"
+        formControlName="userName"
+        >
+        <app-mensagem
+          *ngIf="
+            novoUsuarioForm.get('userName')?.errors?.minusculo &&
+            novoUsuarioForm.get('userName')?.touched"
+          mensagem="Usuario deve ser em letras minusculas"
+          ></app-mensagem>
+        <app-mensagem
+          *ngIf="
+            novoUsuarioForm.get('userName')?.errors?.usuarioExistente"
+          mensagem="Usuário já existe"
+          ></app-mensagem>
+        </div>
 
-  <div class="form-group">
-    <input
-      type="password"
-      class="form-control"
-      placeholder="Senha"
-      formControlName="password"
-      >
-  </div>
+        <div class="form-group">
+          <input
+          type="password"
+          class="form-control"
+          placeholder="Senha"
+          formControlName="password"
+          >
+          <app-mensagem
+            *ngIf="novoUsuarioForm.errors?.senhaIgualUsuario"
+            mensagem="Senha deve ser diferente de usuário"
+            ></app-mensagem>
+        </div>
 
   <button class="btn btn-primary btn-block" [disabled]="userForm.invalid" >Cadastro</button>
 </form>
